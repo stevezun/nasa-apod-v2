@@ -10,10 +10,13 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.nasaapod.BuildConfig;
@@ -28,16 +31,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ImageFragment extends Fragment {
 
-  private static final String IMAGE_URL =
-      "https://apod.nasa.gov/apod/image/2001/ic410_WISEantonucci_1824.jpg";
-
   private WebView contentView;
   private MainViewModel viewModel;
+  private ProgressBar loading;
+  private FloatingActionButton calendar;
 
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
     View root = inflater.inflate(R.layout.fragment_image, container, false);
+    loading = root.findViewById(R.id.loading);
+    calendar = root.findViewById(R.id.calendar);
     setupWebView(root);
     return root;
   }
@@ -46,6 +50,8 @@ public class ImageFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
+    viewModel.getApod().observe(getViewLifecycleOwner(),
+        (Apod apod) -> contentView.loadUrl(apod.getUrl()));
   }
 
   private void setupWebView(View root) {
@@ -58,7 +64,7 @@ public class ImageFragment extends Fragment {
 
       @Override
       public void onPageFinished(WebView view, String url) {
-        // TODO Update view to indicate that load is complete.
+        loading.setVisibility(View.GONE);
       }
     });
     WebSettings settings = contentView.getSettings();
@@ -68,7 +74,6 @@ public class ImageFragment extends Fragment {
     settings.setDisplayZoomControls(false);
     settings.setUseWideViewPort(true);
     settings.setLoadWithOverviewMode(true);
-    new Retriever().start();
   }
 
 }
