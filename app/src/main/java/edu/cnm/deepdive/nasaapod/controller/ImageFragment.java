@@ -1,6 +1,9 @@
 package edu.cnm.deepdive.nasaapod.controller;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -28,6 +32,7 @@ public class ImageFragment extends Fragment {
   private MainViewModel viewModel;
   private ProgressBar loading;
   private FloatingActionButton calendar;
+  private Apod apod;
 
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,7 +55,16 @@ public class ImageFragment extends Fragment {
           Calendar calendar = Calendar.getInstance();
           calendar.setTime(apod.getDate());
           setupCalendarPicker(calendar);
+          this.apod = apod;
         });
+    viewModel.getThrowable().observe(getViewLifecycleOwner(), (throwable) -> {
+      loading.setVisibility(View.GONE);
+      Toast toast = Toast.makeText(getActivity(),
+          getString(R.string.error_message, throwable.getMessage()), Toast.LENGTH_LONG);
+      toast.setGravity(Gravity.BOTTOM, 0,
+          (int) getResources().getDimension(R.dimen.toast_vertical_margin));
+      toast.show();
+    });
   }
 
   private void setupWebView(View root) {
@@ -64,6 +78,10 @@ public class ImageFragment extends Fragment {
       @Override
       public void onPageFinished(WebView view, String url) {
         loading.setVisibility(View.GONE);
+        Toast toast = Toast.makeText(getActivity(), apod.getTitle(), Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM, 0, (int) getContext().getResources()
+            .getDimensionPixelOffset(R.dimen.toast_vertical_margin));
+        toast.show();
       }
     });
     WebSettings settings = contentView.getSettings();
