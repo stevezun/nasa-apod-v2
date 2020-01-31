@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.nasaapod.controller;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -102,6 +103,7 @@ public class ImageFragment extends Fragment {
     return handled;
   }
 
+  @SuppressLint("SetJavaScriptEnabled")
   private void setupWebView(View root) {
     contentView = root.findViewById(R.id.content_view);
     contentView.setWebViewClient(new WebViewClient() {
