@@ -6,4 +6,5 @@
   <string name="title_image">Image</string>
   <string name="error_message">Unable to retrieve APoD. (%s)</string>
   <string name="information">Information</string>
+  <string name="info_ok">Ok</string>
 </resources>

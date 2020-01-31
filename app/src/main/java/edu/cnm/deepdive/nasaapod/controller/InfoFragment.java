@@ -4,9 +4,10 @@ import android.app.Dialog;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.DialogFragment;
 import edu.cnm.deepdive.nasaapod.R;
+import java.util.Date;
 
 public class InfoFragment extends DialogFragment {
 
@@ -18,14 +19,16 @@ public class InfoFragment extends DialogFragment {
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-    String title = getArguments().getString(TITLE_KEY);
-    String description = getArguments().getString(DESCRIPTION_KEY);
-    // TODO Get any additional data.
-    return new AlertDialog.Builder(getContext())
+    Bundle args = getArguments();
+    String title = args.getString(TITLE_KEY);
+    String description = args.getString(DESCRIPTION_KEY);
+    String copyright = args.getString(COPYRIGHT_KEY);
+    Date date = (Date) args.getSerializable(DATE_KEY);
+    return new Builder(getContext())
         .setIcon(R.drawable.ic_info_alert)
         .setTitle(title)
         .setMessage(description)
-        .setNeutralButton("Ok", (dlg, which) -> {})
+        .setNeutralButton(R.string.info_ok, (dlg, which) -> {})
         .create();
   }
 
