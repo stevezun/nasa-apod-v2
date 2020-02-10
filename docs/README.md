@@ -23,6 +23,15 @@ It supports selecting available images by date, as well as storing APOD metadata
 
 ### [Entity-relationship diagram](erd.md)
 
+## External services
+
+* NASA Astronomy Picture-of-the-Day (APOD)
+    
+    * Site URL: <https://apod.nasa.gov/apod/astropix.html>
+    * API URL: <https://api.nasa.gov/> 
+    * Required: Yes, for downloading APOD metadata; as long as the image URLs stay "live", the API is not required for viewing images of previously-download APODs.
+     
 ## Implementation
 
 ### [Data definition language (DDL)](ddl.md)
+
