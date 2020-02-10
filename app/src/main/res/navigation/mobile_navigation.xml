@@ -13,8 +13,8 @@
 
   <fragment
     android:id="@+id/navigation_history"
-    android:label="History"
-    android:name="edu.cnm.deepdive.nasaapod.ui.dashboard.DashboardFragment"
-    tools:layout="@layout/fragment_dashboard"/>
+    android:label="@string/title_history"
+    android:name="edu.cnm.deepdive.nasaapod.controller.HistoryFragment"
+    tools:layout="@layout/fragment_history"/>
 
 </navigation>

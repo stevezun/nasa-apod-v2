@@ -32,7 +32,9 @@ public interface ApodDao {
       + "        GROUP BY \n"
       + "            apod_id \n"
       + "    ) AS acc \n"
-      + "    ON acc.apod_id = a.apod_id;";
+      + "    ON acc.apod_id = a.apod_id "
+      + "ORDER BY \n"
+      + "a.date DESC;";
 
   @Insert
   Single<Long> insert(Apod apod);
@@ -56,7 +58,7 @@ public interface ApodDao {
   LiveData<List<Apod>> select();
 
   @Query(APOD_STATS_QUERY)
-  LiveData<List<ApodWithStats>>selectWithStats();
+  LiveData<List<ApodWithStats>> selectWithStats();
 
   @Query("SELECT * FROM Apod WHERE date = :date")
   Maybe<Apod> select(Date date);

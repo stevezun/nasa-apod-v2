@@ -35,7 +35,7 @@ public class HistoryFragment extends Fragment {
     super.onViewCreated( view, savedInstanceState );
     viewModel = new ViewModelProvider( getActivity() ).get( MainViewModel.class );
     viewModel.getAllApodSummaries().observe( getViewLifecycleOwner(), (apods) -> {
-      ArrayAdapter<ApodWithStats> adapter = new ArrayAdapter<>( this, android.R.layout.simple_list_item_1, apods );
+      ArrayAdapter<ApodWithStats> adapter = new ArrayAdapter<>( getContext(), android.R.layout.simple_list_item_1, apods );
       apodList.setAdapter( adapter );
     } );
   }
