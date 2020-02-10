@@ -23,9 +23,12 @@ public class Apod {
   @Expose
   private Date date;
 
+  @NonNull
+  @ColumnInfo(index = true, collate = ColumnInfo.NOCASE)
   @Expose
   private String title;
 
+  @NonNull
   @Expose
   @SerializedName("explanation")
   private String description;
@@ -33,6 +36,7 @@ public class Apod {
   @Expose
   private String copyright;
 
+  @NonNull
   @ColumnInfo(name = "media_type")
   @Expose
   @SerializedName("media_type")
@@ -43,6 +47,7 @@ public class Apod {
   @SerializedName("service_version")
   private String serviceVersion;
 
+  @NonNull
   @Expose
   private String url;
 
@@ -59,27 +64,30 @@ public class Apod {
     this.id = id;
   }
 
+  @NonNull
   public Date getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(@NonNull Date date) {
     this.date = date;
   }
 
+  @NonNull
   public String getTitle() {
     return title;
   }
 
-  public void setTitle(String title) {
+  public void setTitle(@NonNull String title) {
     this.title = title;
   }
 
+  @NonNull
   public String getDescription() {
     return description;
   }
 
-  public void setDescription(String description) {
+  public void setDescription(@NonNull String description) {
     this.description = description;
   }
 
@@ -91,11 +99,12 @@ public class Apod {
     this.copyright = copyright;
   }
 
+  @NonNull
   public String getMediaType() {
     return mediaType;
   }
 
-  public void setMediaType(String mediaType) {
+  public void setMediaType(@NonNull String mediaType) {
     this.mediaType = mediaType;
   }
 
@@ -107,11 +116,12 @@ public class Apod {
     this.serviceVersion = serviceVersion;
   }
 
+  @NonNull
   public String getUrl() {
     return url;
   }
 
-  public void setUrl(String url) {
+  public void setUrl(@NonNull String url) {
     this.url = url;
   }
 

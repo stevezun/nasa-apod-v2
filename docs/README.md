@@ -2,9 +2,10 @@
 
 ## Introduction
 
-NASA Astronomy Picture of the Day (APOD) is a service provided by NASA.....
+NASA Astronomy Picture of the Day (APOD) is a free service provided by NASA, offering astronomy-oriented images and videos (along with explanatory descriptions), with new content every day.
 
-NASA APoD Browser is an Android-based client for the NASA APOD Service.
+**APoD Browser** is an Android-based client for the NASA APOD Service.
+It supports selecting available images by date, as well as storing APOD metadata and images locally.
 
 ## Intended users
 
@@ -12,7 +13,7 @@ NASA APoD Browser is an Android-based client for the NASA APOD Service.
 
 * Science teachers who want to use interesting photographs in the classroom, to get students excited about astronomy.
 
-* &hellip;
+* Desktop &amp; mobile device users that like using astronomical images as wallpaper.
 
 ### [User stories](user-stories.md) 
 
