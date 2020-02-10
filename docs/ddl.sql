@@ -1,14 +1,5 @@
-CREATE TABLE IF NOT EXISTS `Apod`
-(
-    `apod_id`     INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    `date`        INTEGER                           NOT NULL,
-    `title`       TEXT                              NOT NULL COLLATE NOCASE,
-    `description` TEXT                              NOT NULL,
-    `copyright`   TEXT,
-    `media_type`  TEXT                              NOT NULL,
-    `url`         TEXT                              NOT NULL,
-    `hd_url`      TEXT
-);
+"createSql": "CREATE TABLE IF NOT EXISTS `Apod` (`apod_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `title` TEXT NOT NULL COLLATE NOCASE, `description` TEXT NOT NULL, `copyright` TEXT, `media_type` TEXT NOT NULL, `url` TEXT NOT NULL, `hd_url` TEXT)",
+;
 
 CREATE UNIQUE INDEX IF NOT EXISTS `index_Apod_date` ON `Apod` (`date`);
 

@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import edu.cnm.deepdive.nasaapod.model.entity.Apod;
+import edu.cnm.deepdive.nasaapod.model.pojo.ApodWithStats;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import java.util.Collection;
@@ -14,6 +15,24 @@ import java.util.List;
 
 @Dao
 public interface ApodDao {
+
+  String APOD_STATS_QUERY = "SELECT \n"
+      + "    a.*, \n"
+      + "    acc.lastAccess, \n"
+      + "    acc.accessCount \n"
+      + "FROM \n"
+      + "    Apod AS a \n"
+      + "    LEFT JOIN (\n"
+      + "        SELECT \n"
+      + "            apod_id, \n"
+      + "            MAX(timestamp) AS lastAccess, \n"
+      + "            COUNT(*) AS accessCount \n"
+      + "        FROM \n"
+      + "            Access \n"
+      + "        GROUP BY \n"
+      + "            apod_id \n"
+      + "    ) AS acc \n"
+      + "    ON acc.apod_id = a.apod_id;";
 
   @Insert
   Single<Long> insert(Apod apod);
@@ -35,6 +54,9 @@ public interface ApodDao {
 
   @Query("SELECT * FROM Apod ORDER BY date DESC")
   LiveData<List<Apod>> select();
+
+  @Query(APOD_STATS_QUERY)
+  LiveData<List<ApodWithStats>>selectWithStats();
 
   @Query("SELECT * FROM Apod WHERE date = :date")
   Maybe<Apod> select(Date date);
