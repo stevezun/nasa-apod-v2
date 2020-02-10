@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bf1d0c96b1b6b9823694a6ff515f577b",
+    "identityHash": "c266ff47a3cd82a63214752aeff0ca43",
     "entities": [
       {
         "tableName": "Apod",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`apod_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `title` TEXT, `description` TEXT, `copyright` TEXT, `media_type` TEXT, `url` TEXT, `hd_url` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`apod_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `title` TEXT NOT NULL COLLATE NOCASE, `description` TEXT NOT NULL, `copyright` TEXT, `media_type` TEXT NOT NULL, `url` TEXT NOT NULL, `hd_url` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -24,13 +24,13 @@
             "fieldPath": "title",
             "columnName": "title",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "description",
             "columnName": "description",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "copyright",
@@ -42,13 +42,13 @@
             "fieldPath": "mediaType",
             "columnName": "media_type",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "url",
             "columnName": "url",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "hdUrl",
@@ -71,6 +71,14 @@
               "date"
             ],
             "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Apod_date` ON `${TABLE_NAME}` (`date`)"
+          },
+          {
+            "name": "index_Apod_title",
+            "unique": false,
+            "columnNames": [
+              "title"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Apod_title` ON `${TABLE_NAME}` (`title`)"
           }
         ],
         "foreignKeys": []
@@ -132,7 +140,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bf1d0c96b1b6b9823694a6ff515f577b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c266ff47a3cd82a63214752aeff0ca43')"
     ]
   }
 }
