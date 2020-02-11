@@ -7,8 +7,6 @@
   <string name="error_message">Unable to retrieve APoD. (%s)</string>
   <string name="information">Information</string>
   <string name="info_ok">Ok</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="access_format">(Accessed %1$d times; last accessed %2$s</string>
   <string name="title_history">History</string>
 </resources>
