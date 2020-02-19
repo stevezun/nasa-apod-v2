@@ -1,13 +1,16 @@
 <resources>
+
   <string name="app_name">NASA APoD</string>
-  <string name="title_home">Home</string>
-  <string name="title_dashboard">Dashboard</string>
-  <string name="title_notifications">Notifications</string>
-  <string name="title_image">Image</string>
+  <string name="title_image">APoD Image</string>
   <string name="error_message">Unable to retrieve APoD. (%s)</string>
   <string name="information">Information</string>
   <string name="info_ok">Ok</string>
-  <string name="access_format">(Accessed %1$d %3$s; last accessed %2$s)</string>
-  <string name="title_history">History</string>
+  <string name="title_history">APod History</string>
+  <string name="access_format">(Accessed %1$d %3$s, last on %2$s)</string>
   <string name="default_description">Default description</string>
+  <string name="date_label">Date:</string>
+  <string name="web_url_label">Web page:</string>
+  <string name="url_label">Media URL:</string>
+  <string name="hd_url_label">HD URL:</string>
+
 </resources>

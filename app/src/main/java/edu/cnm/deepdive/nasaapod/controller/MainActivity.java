@@ -1,15 +1,19 @@
 package edu.cnm.deepdive.nasaapod.controller;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.cnm.deepdive.android.DateTimePickerFragment;
 import edu.cnm.deepdive.android.DateTimePickerFragment.Mode;
@@ -26,38 +30,52 @@ public class MainActivity extends AppCompatActivity {
   private ProgressBar loading;
   private FloatingActionButton calendarFab;
   private Calendar calendar;
+  private NavOptions navOptions;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    loading = findViewById(R.id.loading);
     setupNavigation();
     setupViewModel();
-    loading = findViewById(R.id.loading);
     setupCalendarPicker();
   }
 
   private void setupViewModel() {
     viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-    viewModel.getApod().observe(this, (apod) -> calendar.setTime(apod.getDate()));
+    viewModel.getApod().observe(this, (apod) -> {
+      calendar.setTime(apod.getDate());
+      if (navController.getCurrentDestination().getId() != R.id.navigation_image) {
+        navView.setSelectedItemId(R.id.navigation_image);
+        navController.navigate(R.id.navigation_image, null, navOptions);
+      }
+    });
   }
 
   private void setupNavigation() {
+    // TODO Eliminate back stack.
+    navOptions = new NavOptions.Builder()
+        .setPopUpTo(R.id.mobile_navigation, true)
+        .build();
     navView = findViewById(R.id.nav_view);
-    // Passing each menu ID as a set of Ids because each
-    // menu should be considered as top level destinations.
     AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
         R.id.navigation_image, R.id.navigation_history)
         .build();
     navController = Navigation.findNavController(this, R.id.nav_host_fragment);
     NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-    NavigationUI.setupWithNavController(navView, navController);
+    navView.setOnNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        navController.navigate(item.getItemId(), null, navOptions);
+        return true;
+      }
+    });
   }
 
   public void loadApod(Date date) {
     setProgressVisibility(View.VISIBLE);
     viewModel.setApodDate(date);
-    navController.navigate(R.id.navigation_image);
   }
 
   public void setProgressVisibility(int visibility) {

@@ -1,5 +1,6 @@
 <resources>
 
+<!--  TODO Extract/reference dimension resources-->
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!-- Customize your theme here. -->
@@ -20,6 +21,17 @@
   <style name="HistoryItem.Access" parent="HistoryItem">
     <item name="android:textSize">12sp</item>
     <item name="android:textStyle">italic</item>
+  </style>
+
+  <style name="LinkLabel" parent="AppTheme">
+    <item name="android:paddingEnd">8dp</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:textStyle">bold</item>
+
+  </style>
+
+  <style name="BodyText" parent="AppTheme">
+    <item name="android:layout_marginTop">8dp</item>
   </style>
 
 </resources>

@@ -40,7 +40,7 @@ public interface ApodDao {
   Single<Long> insert(Apod apod);
 
   @Insert
-  Single<List<Long>> insert(Collection<Apod> apods);
+  Single<List<Long>> insert(Collection<Apod> apod);
 
   @Insert
   Single<List<Long>> insert(Apod... apods);
