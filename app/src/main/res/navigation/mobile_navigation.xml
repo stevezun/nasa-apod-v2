@@ -7,13 +7,13 @@
 
   <fragment
     android:id="@+id/navigation_image"
-    android:label="@string/title_image"
+    android:label="@string/image_fragment_title"
     android:name="edu.cnm.deepdive.nasaapod.controller.ImageFragment"
     tools:layout="@layout/fragment_image"/>
 
   <fragment
     android:id="@+id/navigation_history"
-    android:label="@string/title_history"
+    android:label="@string/history_fragment_title"
     android:name="edu.cnm.deepdive.nasaapod.controller.HistoryFragment"
     tools:layout="@layout/fragment_history"/>
 

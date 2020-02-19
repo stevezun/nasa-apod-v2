@@ -80,12 +80,6 @@ public class ImageFragment extends Fragment {
       case R.id.info:
         if (apod != null) {
           InfoFragment fragment = new InfoFragment();
-          Bundle args = new Bundle();
-          args.putString(InfoFragment.TITLE_KEY, apod.getTitle());
-          args.putString(InfoFragment.DESCRIPTION_KEY, apod.getDescription());
-          args.putString(InfoFragment.COPYRIGHT_KEY, apod.getCopyright());
-          args.putSerializable(InfoFragment.DATE_KEY, apod.getDate());
-          fragment.setArguments(args);
           fragment.show(getChildFragmentManager(), fragment.getClass().getName());
         }
         break;
